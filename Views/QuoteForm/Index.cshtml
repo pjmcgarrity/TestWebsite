@@ -1,0 +1,48 @@
+﻿@model TestWebsite.Models.Quote.QuoteViewModel
+
+<form asp-action="CreateQuote"
+      asp-controller="QuoteForm"
+      data-ajax="true" data-ajax-method="POST"
+      data-ajax-success="createQuoteSuccess"
+      id="createQuoteForm">
+
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col form-group">
+            @Html.LabelFor(x => x.Quote.ContactName)
+            @Html.TextBoxFor(x => x.Quote.ContactName, new { @class = "form-control" })
+        </div>
+        <div class="col form-group">
+            @Html.LabelFor(x => x.Quote.EmailAddress)
+            @Html.TextBoxFor(x => x.Quote.EmailAddress, new { @class = "form-control", @type = "email" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            @Html.LabelFor(x => x.Quote.TotalSize)
+            @Html.TextBoxFor(x => x.Quote.TotalSize, new { @class = "form-control", @type = "number", @step = "any" })
+        </div>
+        <div class="col form-group">
+            @Html.LabelFor(x => x.Quote.TotalRebuildCost)
+            @Html.TextBoxFor(x => x.Quote.TotalRebuildCost, new { @class = "form-control", @type = "number", @step = "0.10" })
+        </div>
+    </div>
+
+    <button id="submitQuoteFormBtn" type="button" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    window.quoteForm = (function () {
+        return {
+            createQuoteSuccess: function (result) {
+                if (!result.successful) {
+                    alert(result.error);
+                    return;
+                }
+
+                alert("We have recieved your form, your reference is: " + result.reference + ".");
+            }
+        }
+    })();
+</script>
