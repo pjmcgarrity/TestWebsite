@@ -51,6 +51,9 @@ namespace TestWebsite
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "QuoteForm",
+                    pattern: "{controller=QuoteFormController}/{action=CreateQuote}");
             });
         }
     }

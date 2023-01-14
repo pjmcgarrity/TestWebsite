@@ -45,4 +45,18 @@
             }
         }
     })();
+
+    $(document).ready(function () {
+        $("#submitQuoteFormBtn").click(function (e) {
+            e.preventDefault();
+            var formData = $("#createQuoteForm").serialize();
+            $.ajax({
+                url: 'QuoteForm/CreateQuote',
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                data: formData,
+                success: quoteForm.createQuoteSuccess
+            });
+        });
+    });
 </script>
